@@ -5,6 +5,7 @@ public class tessMainTravelController {
     public List<tessTravelerSession__c> sessionList {get;set;}
     public String tokenValue {get;set;}
     //Status del viaje
+    public List<tessTravel__c> travelListDraft {set;get;}
     public List<tessTravel__c> travelListForAuthorizing {set;get;}
     public List<tessTravel__c> travelListAuthorized {set;get;}
     public List<tessTravel__c> travelListRejected {set;get;}
@@ -24,6 +25,7 @@ public class tessMainTravelController {
         travelerProfile = [SELECT Id, Name, lkupAssociatedUser_del__c FROM tessTraveler__c WHERE Id =:sessionList[0].mdTraveler__c];
         chatterUser = [SELECT Id, Alias, Title, MobilePhone FROM User WHERE Id =: travelerProfile.lkupAssociatedUser_del__c];
 
+        travelListDraft = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'draft' ORDER BY CreatedDate];
         travelListForAuthorizing = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'forAuthorizing' ORDER BY name];
         travelListAuthorized = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'authorized' ORDER BY name];
         travelListRejected = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'rejected' ORDER BY name];
@@ -32,7 +34,7 @@ public class tessMainTravelController {
         travelListRefundRejected = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'refundRejected' ORDER BY name];
         travelListRefunded = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'refunded' ORDER BY name];
         travelListConcluded = [SELECT id, name, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND travelStatus__c = 'concluded' ORDER BY name];
-        travelListAll = [SELECT id, name, travelStatus__c, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id ORDER BY name];
+        travelListAll = [SELECT id, name, travelStatus__c, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id ORDER BY CreatedDate];
 
         return null;
 

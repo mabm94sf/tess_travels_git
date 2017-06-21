@@ -32,6 +32,23 @@ global class ModalBoxController {
 			return new PageReference('/MainTravel');
 	}
 
+    public PageReference saveDraft() {
+        if(validateSession()) {
+            sessionList[0].dtExpiresOn__c = DateTime.now().addHours(2);
+            update sessionList[0];
+            Cookie cookToken = new Cookie('tokenSF', tokenValue, null, 2*60*60, false);
+            ApexPages.currentPage().setCookies(new Cookie[] {cookToken});
+            travelerId = sessionList[0].mdTraveler__c;
+
+            tessTravel__c tt = new tessTravel__c(sDescription__c = travelDescription, startingPoint__c = startingPoint,
+                arrival__c = arrival, dDateOfDeparture__c = dDateOfDeparture, dDateOfReturn__c = dDateOfReturn,
+                pklTypeOfTravel__c = typeOfTravel, objective__c = travelPurpose, bBuyTransportation__c = buyTransportation,
+                bBuyLodging__c = buyLodging, bIsCost__c = isCost,
+                travelStatus__c = 'draft', mdTraveler__c = travelerId);
+            insert tt;
+        }
+            return new PageReference('/MainTravel');
+    }
 	public Boolean validateSession() {
         Cookie sessionId = ApexPages.currentPage().getCookies().get('tokenSF');
         if(sessionId == null) {
@@ -56,6 +73,7 @@ global class ModalBoxController {
  	//PickList de objetivo del viaje
 	public List<SelectOption> getPurposeOptions() {
     	List<SelectOption> purposeOptions = new List<SelectOption>();
+        purposeOptions.add(new SelectOption('',''));
         purposeOptions.add(new SelectOption('training','Capacitación'));
 		purposeOptions.add(new SelectOption('compusolucionesConvention','Convención CompuSoluciones'));
     	purposeOptions.add(new SelectOption('supplierConvention','Convención Proveedores'));
@@ -70,6 +88,7 @@ global class ModalBoxController {
     //PickList de tipo de viaje
 	public List<SelectOption> getTypeOptions() {
     	List<SelectOption> typeOptions = new List<SelectOption>();
+        typeOptions.add(new SelectOption('',''));
         typeOptions.add(new SelectOption('national','Nacional'));
 		typeOptions.add(new SelectOption('international','Internacional'));
     	return typeOptions;
