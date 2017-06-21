@@ -1,0 +1,47 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="tessMainTravelController" cache="false" action="{!initializeController}">
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<c:CustomStyles />
+
+<head>
+  <title>Viajes | Políticas de viaje</title>
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system.css')}"/>
+</head>
+
+<body>
+
+  <div id="prueba" class="tess-headerbox">
+    <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium">
+      <center>
+        Mis viajes
+      </center>
+
+    </h1>
+    <c:TravelMenu />
+  </div>
+
+
+  <div class="slds-grid slds-grid--align-end" style="margin-top:-2em;min-width:400px; ">
+    <span class="slds-text-heading--label" style="color:#BBBBBB;">Sesión iniciada |&nbsp; </span>
+    <a href="/viajes/TravelerProfile" class="slds-text-heading--label" style="color:white;"> {!travelerProfile.name}</a>
+
+  </div>
+
+
+  <br/>
+
+
+
+<br/>
+<h1 id="header43" class="slds-text-heading--large" style="color:purple;margin-left:2em">POLÍTICAS DE VIAJE</h1>
+<br/>
+<div style="margin:auto;width:95%" >
+<embed src="https://resources.docs.salesforce.com/sfdc/pdf/salesforce_pages_developers_guide.pdf" width="90%" height="400px" />
+<br/>
+<a href="https://resources.docs.salesforce.com/sfdc/pdf/salesforce_pages_developers_guide.pdf"> Descargar política</a>
+</div>
+
+
+</body>
+</html>
+</apex:page>

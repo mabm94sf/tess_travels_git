@@ -1,0 +1,328 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="tessMainTravelController" cache="false" action="{!initializeController}">
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<c:CustomStyles />
+
+<head>
+  <title>Mis Viajes</title>
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system.css')}"/>
+</head>
+<body>
+
+  <div id="prueba" class="tess-headerbox">
+    <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium">
+      <center>
+        Mis viajes
+      </center>
+
+    </h1>
+    <c:TravelMenu />
+  </div>
+
+
+  <div class="slds-grid slds-grid--align-end" style="margin-top:-2em;min-width:400px; ">
+    <span class="slds-text-heading--label" style="color:#BBBBBB;">Sesión iniciada |&nbsp; </span>
+    <a href="/viajes/TravelerProfile" class="slds-text-heading--label" style="color:white;"> {!travelerProfile.name}</a>
+
+  </div>
+
+
+  <br/>
+
+  <strong class="slds-grid slds-grid--align-end">
+    <c:ModalBoxAddTravel />
+    <div id="spacing" style="width:50px;"></div>
+
+  </strong>
+
+<br/>
+
+
+
+  <!--<h1 class="slds-text-heading--label" style="color:purple;  font-size: 2.2em;">Mis viajes</h1>-->
+
+  <apex:form >
+
+  <apex:pageBlock >
+  <select id="selector"
+  onchange="showSelected()"
+  class="slds-text-heading--label"
+  style="min-width:300px;border: none; border-bottom: 1px solid rgb(81, 144, 218); padding:4px;">
+  <option style="
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;" value="forAuthorizing">Viajes por autorizar</option>
+  <option class="slds-truncate" value="authorized">Viajes autorizados</option>
+  <option value="rejected">Viajes rechazados</option>
+  <option value="cancelled">Viajes cancelados</option>
+  <option value="forReimbursement">Viajes por reembolsar</option>
+  <option value="refundRejected">Viajes cuyo reembolso fue rechazado</option>
+  <option value="refunded">Viajes reembolsados</option>
+  <option value="concluded">Viajes concluidos</option>
+  <option value="all">Todos los viajes</option>
+</select>
+<br/>
+<!--Responsive table-->
+
+<div class="slds-scrollable--x" style="height:400px;overflow:auto;">
+<apex:outputPanel id="travelList">
+<br/>
+<table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-table--striped ">
+  <thead>
+    <tr class="slds-text-heading--label">
+
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Código de viaje
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Origen
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Destino
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Fecha de salida
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Fecha de regreso
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Detalle de viaje
+
+        </div>
+      </th>
+
+
+
+    </tr>
+  </thead>
+
+  <tbody id="forAuthorizingBlock" style="display : none;height:400px;overflow:auto;">
+    <apex:repeat value="{!travelListForAuthorizing}" var="tlfa" id="tlfa1">
+    <tr class="slds-hint-parent">
+
+      <td class="slds-truncate"  data-label="Código de viaje">  {!tlfa.name}</td>
+      <td class="slds-truncate" data-label="Origen">  {!tlfa.startingPoint__c}</td>
+      <td class="slds-truncate" data-label="Destino">  {!tlfa.arrival__c}</td>
+      <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlfa.dDateOfDeparture__c}"/></td>
+      <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlfa.dDateOfReturn__c}"/></td>
+      <td class="slds-truncate" data-label=""><apex:outputPanel >
+        <p><a href="{! '/viajes/TravelDetail?id=' + tlfa.id}">Ver detalle</a></p>
+      </apex:outputPanel></td>
+    </tr>
+  </apex:repeat>
+</tbody>
+<tbody id="authorizedBlock" style="display : none;">
+  <apex:repeat value="{!travelListAuthorized}" var="tla" id="tla1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tla.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tla.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tla.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tla.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tla.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tla.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="rejectedBlock" style="display : none;">
+  <apex:repeat value="{!travelListRejected}" var="tlrej" id="tlrej1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tlrej.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tlrej.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tlrej.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlrej.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlrej.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tlrej.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="cancelledBlock" style="display : none;">
+  <apex:repeat value="{!travelListCancelled}" var="tlcan" id="tlcan1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tlcan.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tlcan.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tlcan.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlcan.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlcan.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tlcan.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="forReimbursementBlock" style="display : none;">
+  <apex:repeat value="{!travelListForReimbursement}" var="tlfr" id="tlfr1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tlfr.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tlfr.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tlfr.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlfr.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlfr.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tlfr.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="refundRejectedBlock" style="display : none;">
+  <apex:repeat value="{!travelListRefundRejected}" var="tlrr" id="tlrr1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tlrr.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tlrr.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tlrr.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlrr.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlrr.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tlrr.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="refundedBlock" style="display : none;">
+  <apex:repeat value="{!travelListRefunded}" var="tlref" id="tlref1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tlref.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tlref.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tlref.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlref.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlref.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tlref.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="concludedBlock" style="display : none;">
+  <apex:repeat value="{!travelListConcluded}" var="tlcon" id="tlcon1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!tlcon.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!tlcon.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!tlcon.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!tlcon.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!tlcon.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + tlcon.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+<tbody id="allBlock" style="display : none;">
+  <apex:repeat value="{!travelListAll}" var="trall" id="trall1">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Código de viaje">  {!trall.name}</td>
+    <td class="slds-truncate" data-label="Origen">  {!trall.startingPoint__c}</td>
+    <td class="slds-truncate" data-label="Destino">  {!trall.arrival__c}</td>
+    <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!trall.dDateOfDeparture__c}"/></td>
+    <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!trall.dDateOfReturn__c}"/></td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <p><a href="{! '/viajes/TravelDetail?id=' + trall.id}">Ver detalle</a></p>
+    </apex:outputPanel></td>
+  </tr>
+</apex:repeat>
+</tbody>
+
+</table>
+
+</apex:outputPanel>
+
+</div>
+<!-- Viajes concluidos -->
+
+
+<div id="allBlock" style="display : none;">
+  <apex:pageBlockTable value="{!travelListAll}" var="trall">
+  <apex:column value="{!trall.name}"/>
+  <apex:column value="{!trall.travelStatus__c}"/>
+  <apex:column value="{!trall.startingPoint__c}"/>
+  <apex:column value="{!trall.arrival__c}"/>
+  <apex:column value="{!trall.dDateOfDeparture__c}"/>
+  <apex:column value="{!trall.dDateOfReturn__c}"/>
+  <apex:column headerValue="Detalle de viaje">
+  <p><a href="{! '/viajes/TravelDetail?id=' + trall.id}">Ver detalle</a></p>
+</apex:column>
+</apex:pageBlockTable>
+</div>
+<br/>
+</apex:pageBlock>
+</apex:form>
+</body>
+<c:tessFooter />
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", showSelected);
+
+function showSelected() {
+  var selector = document.getElementById('selector');
+  console.log(selector);
+  console.log(selector.options);
+  var option = selector.options[selector.selectedIndex];
+  console.log(option.value);
+
+  var forAuthorizingBlock = document.getElementById('forAuthorizingBlock');
+
+  var authorizedBlock = document.getElementById('authorizedBlock');
+  var rejectedBlock = document.getElementById('rejectedBlock');
+  var cancelledBlock = document.getElementById('cancelledBlock');
+  var forReimbursementBlock = document.getElementById('forReimbursementBlock');
+  var refundRejectedBlock = document.getElementById('refundRejectedBlock');
+  var refundedBlock = document.getElementById('refundedBlock');
+  var concludedBlock = document.getElementById('concludedBlock');
+  var allBlock = document.getElementById('allBlock');
+
+  forAuthorizingBlock.style = "display : none";
+  authorizedBlock.style = "display : none";
+  rejectedBlock.style = "display : none";
+  cancelledBlock.style = "display : none";
+  forReimbursementBlock.style = "display : none";
+  refundRejectedBlock.style = "display : none";
+  refundedBlock.style = "display : none";
+  concludedBlock.style = "display : none";
+  allBlock.style = "display : none";
+
+  if(option.value == "forAuthorizing")
+  forAuthorizingBlock.style = "";
+
+
+  if(option.value == "authorized")
+  authorizedBlock.style = "";
+  if(option.value == "rejected")
+  rejectedBlock.style = "";
+  if(option.value == "cancelled")
+  cancelledBlock.style = "";
+  if(option.value == "forReimbursement")
+  forReimbursementBlock.style = "";
+  if(option.value == "refundRejected")
+  refundRejectedBlock.style = "";
+  if(option.value == "refunded")
+  refundedBlock.style = "";
+  if(option.value == "concluded")
+  concludedBlock.style = "";
+  if(option.value == "all")
+  allBlock.style = "";
+}
+</script>
+
+</apex:page>

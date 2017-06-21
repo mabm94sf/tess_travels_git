@@ -1,0 +1,358 @@
+<apex:component >
+<meta name="viewport" content="width=device-width, initial-scale=0.9"/>
+    <style>
+
+        /* Tess colors
+        * AQUA:
+        * Dark:  #5CA298 , rgb (92,162,152)
+        * Light: #44DABF , rgb (60,219,192)
+        * VIOLET:
+        * Dark:  #460967 , rgb (71,10,104)
+        * Light: #631F76 , rgb (100,32,119)
+        * BLUE:
+        * Dark:  #416CA8 , rgb (66,109,169)
+        * Light: #6686b6 , rgb (103,135,183)
+        * GRAY:
+        * Dark:  #CFCFCF , rgb(208,208,206)
+        */
+        @font-face {
+        font-family:"BryantRegular";
+        src: url("{!$Resource.BryantRegularFont}");
+        }
+        .tess-medium-font
+       {
+       font-size: 1.5em;
+       }
+        .slds-text-heading--large {
+          font-family:"BryantRegular";
+          font-weight: bold;
+        }
+        .tess-headerbox:hover
+        {
+        background-color: #631F76;
+        }
+        @media only screen and (max-width:469px)
+        {
+        .tess-headerbox
+        {
+        width: 100%;
+        background-color: #631F76;
+        height:100px;
+        text-align:center;
+        }
+
+
+         .tess-large-font
+        {
+        font-size: 2em;
+        }
+
+        }
+
+           @media only screen and (max-width:505px)
+        {
+
+         .tess-headerbox
+        {
+        width: 100%;
+        background-color: #631F76;
+        height:100px;
+         text-align:center;
+        }
+         .tess-large-font
+        {
+        font-size: 2em;
+
+        }
+
+        }
+        @media only screen and (min-width:506px)
+        {
+        .tess-headerbox
+        {
+        width: 100%;
+        background-color: #631F76;
+        height:100px;
+        }
+
+         .tess-large-font
+        {
+        font-size: 2.5em;
+        }
+
+        }
+
+
+
+        .tess-login-box
+
+        {
+        float:right;
+
+        }
+
+
+
+        .tess-medium-button
+        {
+        height:40px;
+        width:150px;
+        background-color: #460967;
+        @media only screen and (min-width: 30em) {
+        width: 100px;
+        background-color: #460967;
+        }
+        @media only screen and (min-width: 48em) {
+        width: 200px;
+        background-color: #460967;
+        }
+        @media only screen and (min-width: 64em) {
+        width: 350px;
+        background-color: #460967;
+        }
+        }
+
+        .tess-large-button
+        {
+        height:25px;
+        margin: 1em;
+        width:150px;
+
+        @media only screen and (min-width: 30em) {
+        width: 100px;
+
+        }
+        @media only screen and (min-width: 48em) {
+        width: 200px;
+
+        }
+        @media only screen and (min-width: 64em) {
+        width: 350px;
+
+        }
+        }
+
+        .tess-x-large-button
+        {
+        min-height:35px;
+        margin: 1em;
+        max-width: 400px;
+        padding-top: 5px;
+        border: solid 2px white;
+        border-radius: 4px;
+        @media only screen and (min-width: 30em) {
+        width: 200px;
+
+        }
+        @media only screen and (min-width: 48em) {
+        width: 300px;
+
+        }
+        @media only screen and (min-width: 64em) {
+        width: 350px;
+
+        }
+        }
+
+        .tess-x-large-button:hover
+        {
+          background-color: :#ffffff;
+        }
+        .tess-medium-button:hover
+        {
+        background-color:#416CA8;
+        }
+        .tess-modal
+        {
+         display: none; /* Hidden by default */
+   		 position: fixed; /* Stay in place */
+    	 z-index: 1; /* Sit on top */
+    	 left: 0;
+    	 top: 0;
+    	 width: 100%; /* Full width */
+    	 height: 100%; /* Full height */
+    	 overflow: auto; /* Enable scroll if needed */
+      	 background-color: rgb(0,0,0); /* Fallback color */
+    	 background-color: rgba(208,208,206,0.8); /* Black w/ opacity */
+        }
+
+        .tess-modal-content
+        {
+          background-color: #fefefe;
+    	  margin: 15% 10% 0% 10%; /* 15% from the top and centered */
+   	 	  padding: 20px;
+   	   	  border: 1px solid #888;
+    	  width: 80%; /* Could be more or less, depending on screen size */
+         border: solid 1px #631F76;
+        }
+
+        .tess-boxed-option
+        {
+         margin: 5px;;
+        }
+
+        .close
+        {
+        margin-right:-0.5em;
+    	color: #460967;
+   		float: right;
+    	font-size: 48px;
+    	font-weight: bold;
+        margin-top: -2em;
+
+		}
+
+        .collapse,.expand
+        {
+        //margin-right:-0.5em;
+    	color: #460967;
+   		float: right;
+    	font-size: 48px;
+    	font-weight: bold;
+         margin-top: -1em;
+
+		}
+
+
+        .expand
+        {
+        //margin-right:-0.5em;
+    	color: #460967;
+   		float: right;
+    	font-size: 48px;
+    	font-weight: bold;
+         margin-top: -0.6em;
+
+		}
+
+		.clickable:hover,.collapse:hover,.expand:hover,.close:hover,
+		.close:focus
+        {
+
+   		text-decoration: none;
+    	cursor: pointer;
+		}
+
+        html {
+  		height: 100%;
+  		box-sizing: border-box;
+		}
+
+        .footer {
+ 		 position: absolute;
+  		 right: 0;
+ 		 bottom: 0;
+		 left: 0;
+		 padding: 0.5rem;
+		 background-color: #efefef;
+ 		 text-align: center;
+         font-size: 0.8em;
+        	}
+
+        *,
+		*:before,
+		*:after {
+  		box-sizing: inherit;
+				}
+
+        body {
+  		position: relative;
+ 		margin: 0;
+  		padding-bottom: 1rem;
+  		min-height: 100%;
+
+
+		}
+
+        .slds-input-date
+        {
+        height:2.4em;
+        width:100%;
+        border: solid 1px #ddddff;
+        border-radius:5px;
+        }
+
+        .dateFormat
+        {
+        display:none;
+        }
+
+        .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+/****************Menu****************/
+
+.menu-wrapper{
+  margin-top:-3em;
+  position:fixed;
+  z-index: 900;
+}
+
+@media only screen and (max-width:506px)
+{
+  .menu-wrapper{
+    margin-top:-2.4em;
+    position:fixed;
+
+  }
+}
+ @media only screen and (max-width:414px)
+ {
+   .menu-wrapper{
+     margin-top:-4.85em;
+     position:fixed;
+
+   }
+ }
+
+
+  @media only screen and (min-width:506px)
+  {
+    .menu-wrapper{
+      margin-top:-3em;
+      position:fixed;
+
+    }
+  }
+
+
+.option
+{
+  padding:5px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 90;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 90;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-element
+{
+  margin:2px;
+  border:none;
+ padding: 1em;
+  border-bottom: 5px solid #DDDDDD;
+
+}
+    </style>
+</apex:component>

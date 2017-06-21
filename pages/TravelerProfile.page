@@ -1,0 +1,424 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="tessTravelerProfileController" cache="false" action="{!validateSession}">
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<c:CustomStyles />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<head>
+<title>Principal | Perfil del viajero</title>
+<apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system.css')}"/>
+
+</head>
+<body id="myBody" >
+<div class="slds">
+  <div class="grid">
+
+    <div class="tess-headerbox" >
+
+      <!-- MASTHEAD -->
+      <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium">
+        <center>
+          Perfil del viajero
+        </center>
+
+      </h1>
+
+
+      <c:TravelMenu />
+
+      <!-- / MASTHEAD -->
+
+      <!-- PRIMARY CONTENT WRAPPER -->
+      <div class="slds-grid"></div>
+      <!-- / PRIMARY CONTENT WRAPPER -->
+    </div>
+    <div class="slds-grid slds-grid--align-end" style="margin-top:-2em;min-width:400px; ">
+      <span class="slds-text-heading--label" style="color:#BBBBBB;">Sesión iniciada |&nbsp; </span>
+      <a href="/viajes/TravelerProfile" class="slds-text-heading--label" style="color:white;"> {!travelerProfile.name}</a>
+
+    </div>
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.result=='success'}">
+    <div style="background-color:#44DABF; height:40px;text-align:center;color:white; padding-top: 10px; font-size:1.2em;">
+
+      Guardado exitosamente
+
+    </div>
+  </apex:outputPanel>
+  <apex:outputPanel rendered="{!$CurrentPage.parameters.result=='error'}">
+  <div style="background-color:red; min-height:40px;text-align:center;color:white; padding-top: 10px; font-size:1.2em;">
+
+    ¡Error! <br/>
+    {!$CurrentPage.parameters.msg}
+
+  </div>
+</apex:outputPanel>
+<div class="slds-p-around--large" style="width: calc(100vw - 20px);" >
+  <div class="slds-text-heading--large">
+
+    PERFIL DEL VIAJERO
+  </div>
+  <apex:form id="myForm">
+  <div class="slds-page-header">
+    <div id="collapseGeneral" class="collapse" style="display:none">_</div>
+    <div id="expandGeneral" class="expand">+</div>
+    <div class="slds-media">
+      <div class="slds-media--figure">
+        <span class="slds-icon_container slds-icon-utility-slds-icon-utility-user-role" title="Perfil General">
+          <svg class="slds-icon slds-icon-text-default" aria-hidden="true">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#user_role')}"></use>
+          </svg>
+        </span>
+      </div>
+      <div class="slds-media--body">
+        <h1 class="slds-page-header__title slds-truncate slds-align-middle" >Perfil General</h1>
+
+      </div>
+    </div>
+
+    <div class="slds-form--vertical slds-p-top--x-large slds-p-left--medium slds-p-right--medium tess-transition--display"  id="formGeneral" style="display:none">
+      <div class="slds-form-element">
+        <label class="slds-form-element--label" for="travelerName"><strong>Nombre del viajero</strong> </label>
+        <div class="slds-form-element--control">
+          <apex:outputField value="{!travelerProfile.name}" id="travelerName"/>
+        </div>
+
+
+      </div>
+      <div class="slds-form-element">
+        <label class="slds-form-element--label" for="travelerAlias"><strong>Alias</strong> </label>
+        <div class="slds-form-element--control">
+          <apex:outputField value="{!chatterUser.Alias}" id="travelerAlias"/>
+        </div>
+
+
+      </div>
+      <div class="slds-form-element">
+        <label class="slds-form-element--label" for="travelerMobilePhone"><strong>Teléfono Móvil</strong> </label>
+        <div class="slds-form-element--control">
+          <apex:outputField value="{!chatterUser.MobilePhone}" id="travelerMobilePhone"/>
+        </div>
+
+
+      </div>
+      <div class="slds-form-element">
+        <label class="slds-form-element--label" for="travelerTitle"><strong>Puesto</strong> </label>
+        <div class="slds-form-element--control">
+          <apex:outputField value="{!chatterUser.Title}" id="travelerTitle"/>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+  <div class="slds-page-header">
+    <div id="collapseDocumentation" class="collapse" style="display:none">_</div>
+    <div id="expandDocumentation" class="expand">+</div>
+    <div class="slds-media">
+      <div class="slds-media--figure" >
+        <span class="slds-icon_container slds-icon-utility-slds-icon-utility-user-role" title="Datos de documentación">
+          <svg class="slds-icon slds-icon-text-default" aria-hidden="true">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#edit_form')}"></use>
+          </svg>
+        </span>
+      </div>
+      <div class="slds-media--body" style="overflow: hidden;text-overflow:ellipsis; width:inherit" title="Datos de documentación">
+        <h1 class="slds-page-header__title slds-truncate slds-align-middle" >Datos de documentación</h1><h2>
+          (Opcional)
+        </h2>
+
+      </div>
+    </div>
+
+    <div class="slds-form slds-form--inline slds-p-top--x-large slds-p-left--medium slds-p-right--medium" id="formDocumentation" style="display:none">
+      <div class="form-element--group">
+        <div class="slds-form-element--row">
+          <div class="slds-form-element slds-size--1-of-3 slds-medium-size--1-of-3 slds-x-small-size--2-of-2">
+            <label class="slds-form-element--label" for="PassportNumber"><strong>Número de Pasaporte</strong></label>
+            <div class="slds-form-element--control">
+              <apex:inputText styleClass="slds-input" maxlength="15" value="{!travelerProfile.sPassportNumber__c}" id="PassportNumber" />
+            </div>
+
+          </div>
+          <div class="slds-form-element slds-size--1-of-3 slds-medium-size--1-of-3 slds-x-small-size--2-of-2 slds-input-has-icon slds-input-has-icon_left-right">
+            <label class="slds-form-element--label" for="dPassportExpiresOn"><strong>Fecha de expiración de pasaporte</strong></label>
+            <div class="slds-form-element--control">
+
+
+              <apex:inputField showDatePicker="true" type="date" value="{!travelerProfile.dPassportExpiresOn__c}" styleClass=".slds-input--height slds-input-date" id="dPassportExpiresOn"/>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="form-element--group">
+        <div class="slds-form-element--row">
+          <div class="slds-form-element slds-size--1-of-3 slds-medium-size--1-of-3 slds-x-small-size--2-of-2">
+            <label class="slds-form-element--label" for="AmericanVISANumber"><strong>Número de Visa Americana</strong></label>
+            <div class="slds-form-element--control">
+              <apex:inputText styleClass="slds-input" maxlength="15" value="{!travelerProfile.sAmericanVISANumber__c}" id="AmericanVISANumber" />
+            </div>
+          </div>
+          <div class="slds-form-element slds-size--1-of-3 slds-medium-size--1-of-3 slds-x-small-size--2-of-2 slds-input-has-icon slds-input-has-icon_left-right">
+            <label class="slds-form-element--label" for="dAmericanVISAExpiresOn"><strong>Fecha de expiración de VISA Americana</strong></label>
+            <div class="slds-form-element--control">
+
+
+              <apex:inputField showDatePicker="true" type="date" value="{!travelerProfile.dAmericanVISAExpiresOn__c}" styleClass=".slds-input_height slds-input-date" id="dAmericanVISAExpiresOn"/>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br/>
+      <div class="slds-progress-bar slds-progress-bar__medium slds-progress-bar--circular" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" role="progressbar">
+  <span class="slds-progress-bar__value" style="width:100%;">
+    <span class="slds-assistive-text">Progress: 100%</span>
+  </span>
+</div>
+<br/>
+      <span>
+        <h1 class="slds-page-header__title">AGREGAR VISAS EXTRANJERAS</h1>
+      </span>
+      <div class="form-element--group">
+        <div class="slds-form-element--row">
+          <div class="slds-form-element slds-size--3-of-12 slds-medium-size--3-of-12 slds-x-small-size--2-of-2" id="123">
+            <label class="slds-form-element--label" for="AmericanVISANumber"><strong>País de Visa </strong></label>
+            <div class="slds-form-element--control" id="1234">
+              <apex:inputField styleClass="slds-input" value="{!foreignVisa.pklCountry__c}" id="ForeignVISACountry" onchange="copyValue()" />
+              <apex:inputText styleClass="slds-input" maxlength="20" value="{!country}" id="ForeignVISACountryAux" style="display:none" />
+            </div>
+          </div>
+          <div class="slds-form-element slds-size--3-of-12 slds-medium-size--3-of-12 slds-x-small-size--2-of-2">
+            <label class="slds-form-element--label" for="AmericanVISANumber"><strong>Número de Visa </strong></label>
+            <div class="slds-form-element--control">
+              <apex:inputText styleClass="slds-input" maxlength="20" value="{!foreignVisaNumber}" id="ForeignVISANumber" />
+            </div>
+          </div>
+
+          <div class="slds-form-element slds-size--3-of-12 slds-medium-size--3-of-12 slds-x-small-size--2-of-2 slds-input-has-icon slds-input-has-icon_left-right">
+            <label class="slds-form-element--label" for="dAmericanVISAExpiresOn"><strong>Fecha de expiración</strong></label>
+            <div class="slds-form-element--control">
+
+              <apex:inputField showDatePicker="true" type="date" value="{!foreignVisa.dExpiresOn__c}" styleClass=".slds-input_height slds-input-date" id="dForeingVISAExpiresOn" onchange="copyExpirationDate()"/>
+              <apex:inputText value="{!foreignVisaExpiresOn}" style="display:none" id="dForeingVISAExpiresOnAux"/>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <apex:outputPanel id="addVisaBtn" style="width:40%" >
+      <div class="slds-button--success clickable tess-x-large-button ">
+        Agregar Visa extranjera
+      </div>
+      <apex:actionSupport event="onclick" action="{!addVisa}" rerender="lista" >
+      <!--<apex:param name="testParam" value="{!foreignVisa.pklCountry__c}" assignTo="{!foreignVisaExpiresOn}" />-->
+    </apex:actionSupport>
+  </apex:outputPanel>
+  <apex:outputpanel id="lista">
+  <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+    <thead>
+      <tr class="slds-text-heading--label">
+
+        <th class="slds-is-sortable" scope="col">
+          <div class="slds-truncate">País
+
+          </div>
+        </th>
+        <th class="slds-is-sortable" scope="col">
+          <div class="slds-truncate">Número de VISA
+
+          </div>
+        </th>
+        <th class="slds-is-sortable" scope="col">
+          <div class="slds-truncate">Fecha de expiración
+
+          </div>
+        </th>
+
+
+        <th class="slds-cell-shrink"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <apex:repeat value="{!foreignVisaList}" var="elemento" id="theRepeat1">
+    <tr class="slds-hint-parent">
+
+      <td class="slds-truncate"  data-label="País">  {!elemento.pklCountry__c}</td>
+      <td class="slds-truncate" data-label="Número de VISA">  {!elemento.Name}</td>
+      <td class="" data-label="Fecha de expiración">  <apex:outputField value="{!elemento.dExpiresOn__c}"/></td>
+      <td class="slds-truncate" data-label=""><apex:outputPanel >
+
+        <strong class="clickable noselect">Eliminar</strong>
+
+      <apex:actionSupport event="onclick" action="{!deleteVisa}" rerender="lista" >
+      <apex:param name="testParam" value="{!elemento.id}" assignTo="{!foreignVisaId}" />
+    </apex:actionSupport>
+  </apex:outputPanel></td>
+
+    </tr>
+</apex:repeat>
+
+
+
+    </tbody>
+  </table>
+</apex:outputpanel>
+
+
+</div>
+</div>
+
+<div class="slds-page-header">
+<div id="collapseFrequentTraveler" class="collapse" style="display:none">_</div>
+<div id="expandFrequentTraveler" class="expand">+</div>
+<div class="slds-media">
+  <div class="slds-media--figure">
+    <span class="slds-icon_container slds-icon-utility-slds-icon-utility-user-role" title="Datos de viajero y cliente frecuente">
+      <svg class="slds-icon slds-icon-text-default" aria-hidden="true">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#identity')}"></use>
+      </svg>
+    </span>
+  </div>
+  <div class="slds-media--body" style="overflow: hidden;text-overflow:ellipsis; width:inherit" title="Datos de viajero y cliente frecuente">
+    <h1 class="slds-page-header__title slds-truncate slds-align-middle"  >Datos de Viajero y Cliente Frecuente</h1><h2>
+      (Opcional)
+    </h2>
+
+  </div>
+
+</div>
+
+<div class="slds-form slds-form--inline slds-p-top--x-large slds-p-left--medium slds-p-right--medium" id="formFrequentTraveler" style="display:none">
+
+  <div class="form-element--group">
+    <div class="slds-form-element slds-size--3-of-12 slds-medium-size--3-of-12 slds-x-small-size--2-of-2">
+      <label class="slds-form-element--label" for="freqTravelNumber"><strong>Número de Viajero </strong></label>
+      <div class="slds-form-element--control">
+        <apex:inputText styleClass="slds-input" maxlength="20" value="{!freqTravelerNumber}" id="freqTravelNumber" />
+      </div>
+    </div>
+
+    <div class="slds-form-element slds-size--3-of-12 slds-medium-size--3-of-12 slds-x-small-size--2-of-2" >
+      <apex:outputPanel >
+      <label class="slds-form-element--label" for="typeSelector"><strong>¿Hotel o Aerolínea?</strong></label>
+      <div class="slds-form-element--control">
+        <apex:selectList styleClass="slds-input" value="{!accountTypeSelection}" multiselect="false" size="1" id="typeSelector" >
+        <apex:selectOptions value="{!accountTypeSelectOptions}"/>
+      </apex:selectList>
+    </div>
+    <apex:actionSupport event="onchange" action="{!getBusinessReload}" rerender="accountSelectionPicklist" status="status-for-account">
+    <!--<apex:param name="testParam" value="{!foreignVisa.pklCountry__c}" assignTo="{!foreignVisaExpiresOn}" />-->
+  </apex:actionSupport>
+</apex:outputPanel>
+</div>
+<div class="slds-form-element slds-size--3-of-12 slds-medium-size--3-of-12 slds-x-small-size--2-of-2" >
+<apex:outputPanel id="accountSelectionPicklist">
+<label class="slds-form-element--label" for="typeSelector"><strong>Empresa</strong></label>
+<div class="slds-form-element--control">
+  <apex:selectList styleClass="slds-input" value="{!accountSelection}" multiselect="false" size="1" id="accountSelector">
+  <apex:selectOptions value="{!accountSelectOptions}"/>
+</apex:selectList>
+</div>
+<apex:actionStatus id="status-for-account">
+<apex:facet name="start">
+Cargando...
+</apex:facet>
+</apex:actionStatus>
+</apex:outputPanel>
+</div>
+
+<apex:outputPanel id="addFreqBtn" >
+<div class="slds-button--success clickable tess-x-large-button ">
+Agregar Datos de cliente frecuente
+</div>
+<apex:actionSupport event="onclick" action="{!addFrequentTravelerData}" rerender="freqList" >
+<!--<apex:param name="testParam" value="{!foreignVisa.pklCountry__c}" assignTo="{!foreignVisaExpiresOn}" />-->
+</apex:actionSupport>
+</apex:outputPanel>
+<apex:outputpanel id="freqList">
+<table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+  <thead>
+    <tr class="slds-text-heading--label">
+
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Número de viajero
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Tipo de empresa
+
+        </div>
+      </th>
+      <th class="slds-is-sortable" scope="col">
+        <div class="slds-truncate">Empresa
+
+        </div>
+      </th>
+      <th class="slds-cell-shrink"></th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  <apex:repeat value="{!freqTravelerList}" var="elemento" id="freqRepeat">
+  <tr class="slds-hint-parent">
+
+    <td class="slds-truncate"  data-label="Número de viajero">  {!elemento.Name}</td>
+    <td class="slds-truncate" data-label="Tipo de empresa">  {!elemento.f_sRecordTypeName__c}</td>
+    <td class="slds-truncate" data-label="Empresa"> {!elemento.lkupBusiness__r.Name}</td>
+    <td class="slds-truncate" data-label=""><apex:outputPanel >
+
+      <strong class="clickable noselect">Eliminar</strong>
+
+      <apex:actionSupport event="onclick" action="{!deleteFrequentTravelerData}" rerender="freqList" >
+      <apex:param name="freqId" value="{!elemento.id}" assignTo="{!freqTravelerId}" />
+      </apex:actionSupport>
+</apex:outputPanel></td>
+
+  </tr>
+</apex:repeat>
+
+
+
+  </tbody>
+</table>
+</apex:outputpanel>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<apex:commandButton action="{!save}" value="Guardar perfil" styleClass="slds-button--neutral tess-large-button">
+
+</apex:commandButton>
+
+
+</apex:form>
+</div>
+
+
+
+
+
+</div>
+</div>
+
+</body>
+<c:tessTravelerProfileController modalBox="{!modalBox}" />
+<c:tessFooter />
+</html>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:component >
+    <c:CustomStyles />
+    <div class="footer">
+        Powered by Tesselar Soluciones S.A. de C.V. | <a href="https://www.tesselar.mx"><strong>Website</strong></a>
+        </div>
+</apex:component>

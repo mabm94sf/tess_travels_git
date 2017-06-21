@@ -1,0 +1,100 @@
+<apex:component >
+    <apex:attribute name="modalBox" type="boolean" description="TODO: Describe me"/>
+    <script>
+
+    var modal = document.getElementById('myModal');
+    var span = document.getElementById("close");
+    var sen = document.getElementById("sen");
+    var addVisaBtn = document.getElementById("addVisaBtn");
+    var visaCountry = document.getElementById("j_id0:myForm:ForeignVISACountry");
+    var visaCountryAux = document.getElementById("j_id0:myForm:ForeignVISACountryAux");
+    var visaExpirationDate = document.getElementById("j_id0:myForm:dForeingVISAExpiresOn");
+    var visaExpirationDateAux = document.getElementById("j_id0:myForm:dForeingVISAExpiresOnAux");
+    //------------------------------Toggle logic------------------------------//
+    //---------------------------------START----------------------------------//
+
+    var expandables = document.getElementsByClassName("expand");
+    var collapsables = document.getElementsByClassName("collapse");
+
+    function getId (object)
+    {
+      //alert(object.getAttribute('html-delete'));
+    }
+    function copyValue()
+    {
+      visaCountryAux.value = visaCountry.value;
+    }
+    var f1 = new Date (visaExpirationDate.value);
+    visaExpirationDateAux.value = (f1.getDate()+1)+'/'+(f1.getMonth()+1)+'/'+f1.getFullYear();
+
+    function copyExpirationDate()
+    {
+         f1 = new Date (visaExpirationDate.value);
+      visaExpirationDateAux.value = (f1.getDate()+1)+'/'+(f1.getMonth()+1)+'/'+f1.getFullYear();
+          console.log("error here");
+    }
+    var bModal = '{!modalBox}';
+
+    var i;
+
+    for (i = 0; i < expandables.length; i++) {
+
+        expandables[i].onclick = function()
+        {
+
+            this.style.display="none";
+            var title = this.id.split("expand")[1];
+            document.getElementById("collapse"+title).style.display="block";
+            document.getElementById("form"+title).style.display="block";
+            //collapseGen.style.display="block";
+            //formGen.style.display="block";
+            console.log(title);
+        }
+
+    }
+
+    for (i = 0; i < collapsables.length; i++) {
+
+        collapsables[i].onclick = function()
+        {
+
+            this.style.display="none";
+            var title = this.id.split("collapse")[1];
+            document.getElementById("expand"+title).style.display="block";
+            document.getElementById("form"+title).style.display="none";
+            //collapseGen.style.display="block";
+            //formGen.style.display="block";
+            console.log(title);
+        }
+
+    }
+
+    //------------------------------Toggle logic------------------------------//
+    //----------------------------------END-----------------------------------//
+
+    if (bModal=='true')
+    {
+
+        modal.style.display = "block";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    try{
+        sen.onclick = function() {
+            modal.style.display = "block";
+        }
+    }
+    catch(e)
+    {
+        console.log("Modal box not used");
+    }
+
+    function showVisa()
+    {
+      console.log("Clicked visa");
+    }
+
+    </script>
+</apex:component>

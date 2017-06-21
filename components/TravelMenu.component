@@ -1,0 +1,25 @@
+<apex:component >
+<c:CustomStyles />
+<div class="menu-wrapper">
+  <div class="dropdown">
+    <span >
+      <apex:image url="{!$Resource.MenuIcon}" width="40" height="40"/>
+
+    </span>
+  
+    <div class="dropdown-content">
+      <div class=" dropdown-element clickable" onclick="window.location.href='/viajes/TravelerProfile';">
+        <p>PERFIL DEL VIAJERO</p>
+      </div>
+      <div class="dropdown-element clickable" onclick="window.location.href='/viajes/MainTravel';">
+        <p>MIS VIAJES</p>
+      </div>
+      <div class="dropdown-element clickable" onclick="window.location.href='/viajes/TravelPolicies';">
+        <p>POLÍTICAS DE VIAJE </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</apex:component>

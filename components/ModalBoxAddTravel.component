@@ -1,0 +1,168 @@
+<apex:component controller="ModalBoxController" allowDML="true">
+<button class="slds-button slds-button--success" onclick="toggleModal()">
+  <svg class="slds-button__icon slds-button__icon_left slds-button__icon_large" aria-hidden="true">
+    <use xlink:href="{!URLFOR($Resource.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#add')}" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+  </svg>
+  Agregar Viaje
+</button>
+  <div id="mainModalBoxContainer" class="slds-hide">
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <div class="slds-modal__header">
+          <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="closeWindow()"></button>
+          <h1 id="header43" class="slds-text-heading--large" style="color:purple;">NUEVO VIAJE</h1>
+          <div class="slds-border_top"/>
+        </div>
+        <div class="slds-modal__content slds-p-around--small">
+          <apex:form >
+            <apex:actionFunction name="callSaveTravel" action="{!saveTravel}" onComplete="alert('After apex method') ;"/>
+
+            <!-- Descripción del viaje -->
+            <div class="slds-form slds-form--stacked">
+              <div class="slds-form-element">
+                <label class="slds-form-element__label" for="inputDescription">Descripción: </label>
+                <div class="slds-form-element__control">
+                  <input type="text" id="inputDescription" class="slds-input" placeholder="Descripción del viaje" value="{!travelDescription}"/>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <!-- Lugar de salida y de llegada -->
+            <div class="slds-form slds-form--compound">
+              <div class="slds-form-element__group">
+                <div class="slds-form-element__row slds-size--3-of-5">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="inputStartingPoint">Origen: </label>
+                    <apex:input type="text" id="inputStartingPoint" styleclass="slds-input" html-placeholder="Origen" value="{!startingPoint}"/>
+                  </div>
+                  </div>
+                  <div class="slds-form-element__row slds-size--3-of-5">
+
+                  <div class="slds-form-element slds-size--1-of-5">
+                    <label class="slds-form-element__label" for="inputArrival">Destino: </label>
+                    <apex:input type="text" id="inputArrival" styleclass="slds-input" html-placeholder="Destino" value="{!arrival}"/>
+                  </div>
+                </div>
+                <br/>
+            <!-- Fecha de salida y de llegada -->
+                <div class="slds-form-element__row">
+                  <div class="slds-form-element slds-size--1-of-2">
+                    <label class="slds-form-element__label" for="inputDateOfDeparture">Fecha de salida: </label>
+                    <apex:input type="date" id="inputDateOfDeparture" styleclass="slds-input" value="{!dDateOfDeparture}"/>
+                  </div>
+                  <div class="slds-form-element slds-size--1-of-2">
+                    <label class="slds-form-element__label" for="inputArrival">Fecha de regreso: </label>
+                    <apex:input type="date" id="inputDateOfReturn" styleclass="slds-input" value="{!dDateOfReturn}"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
+
+            <!-- Tipo de viaje -->
+            <div class="slds-form-element">
+                <label class="slds-form-element__label">Tipo de viaje: </label>
+                <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                        <apex:selectList size="1" value="{!typeOfTravel}" styleClass="slds-select">
+                            <apex:selectOptions value="{!typeOptions}" />
+                        </apex:selectList>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <!-- Objetivo del viaje -->
+            <div class="slds-form-element">
+                <label class="slds-form-element__label">Objetivo del viaje: </label>
+                <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                        <apex:selectList size="1" value="{!travelPurpose}" styleClass="slds-select">
+                            <apex:selectOptions value="{!purposeOptions}" />
+                        </apex:selectList>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <!-- Gastos del viajero -->
+            <fieldset class="slds-form__element" >
+              <legend class="slds-form-element__legend">Deseo comprar por mi cuenta: </legend>
+                <div class="slds-form-element__row" >
+                   <div class="slds-form-element">
+                      <label class="slds-checkbox">
+                        <apex:inputcheckbox id="checkTransportation" styleclass="slds-input" value="{!buyTransportation}" />
+                          <span class="slds-checkbox--faux"></span>
+                          <span class="slds-form-element__label">Transporte</span>
+                      </label>
+                   </div>
+                </div>
+                <div class="slds-form-element__row">
+                   <div class="slds-form-element">
+                      <label class="slds-checkbox">
+                        <apex:inputcheckbox id="checkLodging" styleclass="slds-input" value="{!buyLodging}" />
+                          <span class="slds-checkbox--faux"></span>
+                          <span class="slds-form-element__label">Hospedaje</span>
+                      </label>
+                   </div>
+                </div>
+            </fieldset>
+            <br/>
+            <!-- ¿Es un costo? -->
+            <div class="slds-form-element__row">
+              <div class="slds-form-element">
+                <label class="slds-checkbox">
+                  <apex:inputcheckbox id="checkisCost" styleclass="slds-input" value="{!isCost}" />
+                    <span class="slds-form-element__label">¿Es un costo?</span>
+                    <span class="slds-checkbox--faux"></span>
+                </label>
+              </div>
+            </div>
+
+          </apex:form>
+        </div>
+        <div class="slds-modal__footer">
+          <button class="slds-button slds-button--neutral" onclick="toggleModal()">Cancelar</button>
+          <button class="slds-button slds-button--brand" onclick="jsSaveTravel()">Guardar</button>
+        </div>
+      </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop--open"></div>
+  </div>
+
+  <style>
+    @font-face {
+    font-family:"BryantRegular";
+    src: url("{!$Resource.BryantRegularFont}");
+    }
+
+    .slds-text-heading--large {
+      font-family:"BryantRegular";
+      font-weight: bold;
+    }
+
+  </style>
+
+  <script>
+
+    function toggleModal() {
+      var mainContainer = document.getElementById('mainModalBoxContainer');
+      if (mainContainer.classList.contains('slds-hide')) {
+        mainContainer.classList.remove('slds-hide');
+        mainContainer.classList.add('slds-show');
+      } else {
+        mainContainer.classList.remove('slds-show');
+        mainContainer.classList.add('slds-hide');
+      }
+    }
+
+    function jsSaveTravel() {
+      toggleModal();
+      callSaveTravel();
+    }
+
+    function closeWindow() {
+      window.close();
+    }
+
+  </script>
+
+</apex:component>

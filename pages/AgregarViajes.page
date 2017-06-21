@@ -1,0 +1,83 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="tessTravelLoginController">
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <c:CustomStyles />
+        <head>
+            <title>Principal | Viajes</title>
+            <apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system.css')}"/>
+        </head>
+
+        <body>
+
+            <!-- REQUIRED SLDS WRAPPER -->
+            <div class="slds">
+
+                <div class="tess-headerbox">
+
+                    <!-- MASTHEAD -->
+                    <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium">
+                        Administración de viajes
+                        <br/>
+
+                        Usuario Actual: {!storedUser}
+                    </h1>
+
+                    <!-- / MASTHEAD -->
+
+                    <!-- PRIMARY CONTENT WRAPPER -->
+                    <div class="slds-grid"></div>
+                    <!-- / PRIMARY CONTENT WRAPPER -->
+                </div>
+
+                <apex:form rendered="{!!logged}">
+
+                    <div class="slds-form--horizontal slds-p-top--x-large slds-p-left--medium slds-p-right--medium">
+                        <div class="slds-form-element slds-size--5-of-6 slds-medium-size--4-of-6 slds-large-size--8-of-12 ">
+                            <label class="slds-form-element__label" for="user">Usuario</label>
+                            <div class="slds-form-element__control">
+                                <apex:inputText value="{!user}" id="user" styleClass="slds-input"/>
+
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-size--5-of-6 slds-medium-size--4-of-6 slds-large-size--8-of-12 ">
+                            <label class="slds-form-element__label" for="pass">Contraseña</label>
+                            <div class="slds-form-element__control">
+                                <apex:inputSecret value="{!userPassword}" id="pass" styleClass="slds-input"/>
+
+                            </div>
+                        </div>
+                        <div class="slds-form-element slds-grid--align-center slds-size--1-of-2 slds-p-left--medium slds-p-right--medium">
+                            <apex:commandButton action="{!logUserIn}" value="Login" styleClass="slds-button--brand tess-medium-button"/>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                </apex:form>
+                <apex:outputPanel rendered="{!logged}">
+                    Resultado Usuario: {!usuario.Name}<br/>
+                    {!usuario.Alias}<br/>
+                    {!usuario.Id}<br/>
+                    {!usuario.UserName}<br/>
+                    <br/>
+                    Accounts:<br/>
+                    <apex:repeat value="{!accounts}" var="elemento" id="theRepeat">
+
+                        {!elemento.Name}<br/>
+
+                    </apex:repeat>
+                </apex:outputPanel>
+
+                <apex:form rendered="{!logged}">
+                    <div>
+                        <apex:commandButton action="{!tryLogout}" value="Logout"/>
+                    </div>
+                </apex:form>
+                <c:ModalBoxAddTravel />
+
+            </div>
+            <!-- / REQUIRED SLDS WRAPPER -->
+        </body>
+        <c:tessFooter />
+    </html>
+</apex:page>
