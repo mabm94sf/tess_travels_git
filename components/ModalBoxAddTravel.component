@@ -122,7 +122,7 @@
         <div class="slds-modal__footer">
           <div class="container">
             <div>
-              <button class="slds-button slds-button--neutral" onclick="jsSaveAsDraft()">Guardar como borrador</button> 
+              <button class="slds-button slds-button--neutral" onclick="jsSaveAsDraft()">Guardar como borrador</button>
             </div>
             <div>
               <button class="slds-button slds-button--neutral" onclick="toggleModal()">Cancelar</button>
@@ -151,7 +151,7 @@
     }
 
     .slds-button--icon {
-      margin-left: 96%; 
+      margin-left: 96%;
       margin-top: -8%;
       color: white;
       float: right;
@@ -163,7 +163,7 @@
       display: flex;
       justify-content: space-between;
     }
-    
+
   }
   </style>
 
@@ -174,9 +174,13 @@
       if (mainContainer.classList.contains('slds-hide')) {
         mainContainer.classList.remove('slds-hide');
         mainContainer.classList.add('slds-show');
+        console.log('Show');
+        console.log(event.target);
       } else {
         mainContainer.classList.remove('slds-show');
         mainContainer.classList.add('slds-hide');
+        console.log('Hide');
+        console.log(event.target);
       }
     }
 
