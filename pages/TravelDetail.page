@@ -28,9 +28,10 @@
 
 
 	<br/>
-	<div class="slds-button slds-button--destructive ">Eliminar</div>
-
-	<section class="slds-popover  slds-nubbin--down" role="dialog" aria-labelledby="dialog-heading-id-01" aria-describedby="dialog-body-id-277">
+	<div class="slds-grid slds-grid__vertical-align-center">
+	<button class="slds-button slds-button--destructive slds-col--bump-right ">Eliminar</button>
+<div style="margin-top:5em;position:absolute;z-index:10;">
+	<section class="slds-popover  slds-nubbin--top" role="dialog" aria-labelledby="dialog-heading-id-01" aria-describedby="dialog-body-id-277"	>
   <button class="slds-button slds-button_icon slds-button--icon-large slds-float--right slds-popover__close slds-button--icon-inverse" title="Close dialog">
     <svg class="slds-button__icon" aria-hidden="true">
 			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
@@ -51,6 +52,9 @@
     </div>
   </footer>
 </section>
+</div>
+</div>
+
 	<table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-table--striped " >
 	  <thead>
 	    <tr class="slds-text-heading--label">
