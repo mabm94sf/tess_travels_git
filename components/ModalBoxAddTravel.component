@@ -181,6 +181,7 @@
         mainContainer.classList.add('slds-hide');
         console.log('Hide');
         console.log(event.target);
+        console.log('--');
       }
     }
 
