@@ -6,7 +6,9 @@
   Agregar Viaje
 </button>
   <div id="mainModalBoxContainer" class="slds-hide">
+
     <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+      <div class="slds-backdrop slds-backdrop--open" id="modalBackground" onclick="toggleModal();" style="z-index:-1"></div>
       <div class="slds-modal__container">
       <button class="slds-button slds-button--icon" title="Cerrar" onclick="toggleModal()">x</button>
         <div class="slds-modal__header">
@@ -132,7 +134,7 @@
         </div>
       </div>
     </div>
-    <div class="slds-backdrop slds-backdrop--open" id="modalBackground" onclick="toggleModal()"></div>
+
   </div>
 
   <style>
@@ -174,14 +176,12 @@
       if (mainContainer.classList.contains('slds-hide')) {
         mainContainer.classList.remove('slds-hide');
         mainContainer.classList.add('slds-show');
-        console.log('Show');
-        console.log(event.target);
+
       } else {
         mainContainer.classList.remove('slds-show');
         mainContainer.classList.add('slds-hide');
-        console.log('Hide');
-        console.log(event.target);
-        console.log('--');
+
+
       }
     }
 
