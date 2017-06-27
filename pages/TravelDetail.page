@@ -1,139 +1,106 @@
 <apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="tessTravelDetail" cache="false" action="{!initializeController}">
 
-	<html>
+<html>
 
-	   <c:CustomStyles />
-		 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<head>
-	       		<title>Detalle del Viaje</title>
-	        <apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system.css')}"/>
-	    </head>
+<c:CustomStyles />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<head>
+	<title>Detalle del Viaje</title>
+	<apex:stylesheet value="{!URLFOR($Resource.SLDS, 'assets/styles/salesforce-lightning-design-system.css')}"/>
+</head>
 
-	    <div id="Detalle" class="tess-headerbox">
-	        <h1 class="slds-text-heading--label slds-m-bottom--large tess-medium-font slds-text-color--inverse slds-p-around--medium">
-	            <center>
-	                Detalle del viaje <br/><apex:outputField value="{!travelDetail.name}"/>
-	            </center>
+<div id="Detalle" class="tess-headerbox">
+	<h1 class="slds-text-heading--label slds-m-bottom--large tess-medium-font slds-text-color--inverse slds-p-around--medium">
+		<center>
+			Detalle del viaje <br/><apex:outputField value="{!travelDetail.name}"/>
+		</center>
 
-	        </h1>
+	</h1>
 
-	    </div>
-			<div class="slds-grid slds-grid--align-end" style="margin-top:-2em;min-width:400px; ">
-		    <span class="slds-text-heading--label" style="color:#BBBBBB;">Sesión iniciada |&nbsp; </span>
-		    <a href="/viajes/TravelerProfile" class="slds-text-heading--label" style="color:white;"> {!travelerProfile.name}</a>
-
-		  </div>
- <c:TravelMenu />
-	<br/>
-
-
-	<br/>
-	<div class="slds-grid slds-grid__vertical-align-center">
-	<button class="slds-button slds-button--destructive slds-col--bump-right ">Eliminar</button>
-<div style="margin-top:5em;position:absolute;z-index:10;">
-	<section class="slds-popover  slds-nubbin--top" role="dialog" aria-labelledby="dialog-heading-id-01" aria-describedby="dialog-body-id-277"	>
-  <button class="slds-button slds-button_icon slds-button--icon-large slds-float--right slds-popover__close slds-button--icon-inverse" title="Close dialog">
-    <svg class="slds-button__icon" aria-hidden="true">
-			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
-
-    </svg>
-    <span class="slds-assistive-text">Close dialog</span>
-  </button>
-  <header class="slds-popover__header slds-p-vertical_medium">
-    <h2 id="dialog-heading-id-01" class="slds-text-heading--medium">Confirmación</h2>
-  </header>
-  <div class="slds-popover__body" id="dialog-body-id-277">
-    <p>¿Estás seguro de eliminar este viaje?</p>
-  </div>
-  <footer class="slds-popover__footer">
-    <div class="slds-grid slds-grid__vertical-align-center">
-
-      <button class="slds-button slds-button--destructive slds-col--bump-left">Sí</button>
-    </div>
-  </footer>
-</section>
 </div>
+<div class="slds-grid slds-grid--align-end" style="margin-top:-2em;min-width:400px; ">
+	<span class="slds-text-heading--label" style="color:#BBBBBB;">Sesión iniciada |&nbsp; </span>
+	<a href="/viajes/TravelerProfile" class="slds-text-heading--label" style="color:white;"> {!travelerProfile.name}</a>
+
+</div>
+<c:TravelMenu />
+<br/>
+
+
+<br/>
+<div class="slds-grid slds-grid__vertical-align-center slds-grid--align-end">
+	<button class="slds-button slds-button--destructive slds-order--1">Eliminar</button>
+	<div class="slds-order--2" style="width:3em;"></div>
 </div>
 
-	<table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-table--striped " >
-	  <thead>
-	    <tr class="slds-text-heading--label">
 
-	      <th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Código de viaje</div>
-	      </th>
-				<th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Descripción</div>
-	      </th>
-	      <th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Origen</div>
-	      </th>
-	      <th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Destino</div>
-	      </th>
-	      <th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Fecha de salida</div>
-	      </th>
-	      <th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Fecha de regreso</div>
-	      </th>
-	      <th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Objetivo del viaje</div>
-	      </th>
-				<th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Tipo de viaje</div>
-	      </th>
-				<th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">Status del viaje</div>
-	      </th>
-				<th class="slds-is-sortable" scope="col">
-	        <div class="slds-truncate">¿Solicitó anticipo?</div>
-	      </th>
-	    </tr>
-	  </thead>
+<div class="slds-grid slds-wrap  slds-p-around--small slds-p-left--x-large">
+	<div class="slds-p-horizontal--small slds-size--1-of-1  slds-border--bottom slds-p-top--small ">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > Código de viaje </div>
+		<div class=" slds-p-around--small">  <apex:outputField value="{!travelDetail.name}" id="travelName"/></div>
+	</div>
+	<br/>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-border--bottom slds-p-top--small ">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > Más detalles </div>
+		<div class=" slds-p-around--small">    <apex:outputField value="{!travelDetail.sDescription__c}" id="travelDescription"/></div>
+	</div>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > Origen </div>
+		<div class=" slds-p-around--small">  <apex:outputField value="{!travelDetail.startingPoint__c}" id="travelStartingPoint"/></div>
+	</div>
+		<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small ">Destino </div>
+		<div class=" slds-p-around--small">  <apex:outputField value="{!travelDetail.arrival__c}" id="travelArrival"/></div>
+	</div>
 
-	  <tbody id="travelDetailTable" >
-
-	    <tr class="slds-hint-parent">
-
-	      <td class="slds-truncate"  data-label="Código de viaje">  <apex:outputField value="{!travelDetail.name}" id="travelName"/></td>
-	      <td class="slds-truncate" data-label="Más detalles">    <apex:outputField value="{!travelDetail.sDescription__c}" id="travelDescription"/></td>
-	      <td class="slds-truncate" data-label="Origen">  <apex:outputField value="{!travelDetail.startingPoint__c}" id="travelStartingPoint"/></td>
-				<td class="slds-truncate" data-label="Destino">  <apex:outputField value="{!travelDetail.arrival__c}" id="travelArrival"/></td>
-	      <td class="slds-truncate" data-label="Fecha de salida">  <apex:outputField value="{!travelDetail.dDateOfDeparture__c}"/></td>
-	      <td class="slds-truncate" data-label="Fecha de regreso">  <apex:outputField value="{!travelDetail.dDateOfReturn__c}"/></td>
-				<td class="slds-truncate" data-label="Objetivo"> <apex:outputField value="{!travelDetail.objective__c}" id="travelPurpose"/></td>
-				<td class="slds-truncate" data-label="Tipo de viaje">  <apex:outputField value="{!travelDetail.pklTypeOfTravel__c}" id="typeOfTrip"/></td>
-				<td class="slds-truncate" data-label="Status del viaje"> <apex:outputField value="{!travelDetail.travelStatus__c}" id="tripStatus"/></td>
-				<td class="slds-truncate" data-label="¿Solicitó anticipo?">    <apex:outputField value="{!travelDetail.bAdvancePaymentRequest__c}" id="cashAdvance"/></td>
-
-	    </tr>
-
-	</tbody>
-</table>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small "> Fecha de salida</div>
+		<div class=" slds-p-around--small">  <apex:outputField value="{!travelDetail.dDateOfDeparture__c}"/></div>
+	</div>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small "> Fecha de regreso </div>
+		<div class=" slds-p-around--small">  <apex:outputField value="{!travelDetail.dDateOfReturn__c}"/></div>
+	</div>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > Objetivo </div>
+		<div class=" slds-p-around--small"> <apex:outputField value="{!travelDetail.objective__c}" id="travelPurpose"/></div>
+	</div>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > Tipo de viaje </div>
+		<div class=" slds-p-around--small">  <apex:outputField value="{!travelDetail.pklTypeOfTravel__c}" id="typeOfTrip"/></div>
+	</div>
+	<div class="slds-p-horizontal--small slds-size--1-of-1  slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > Estatus de viaje </div>
+		<div class=" slds-p-around--small"> <apex:outputField value="{!travelDetail.travelStatus__c}" id="tripStatus"/></div>
+	</div>
+	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-border--bottom slds-p-top--small">
+		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > ¿Solicitó anticipo? </div>
+		<div class=" slds-p-around--small">    <apex:outputField value="{!travelDetail.bAdvancePaymentRequest__c}" id="cashAdvance"/></div>
+	</div>
+</div>
 
 
 
-	<apex:pageBlock title="Gastos">
-		<apex:pageBlockTable value="{!expenses}" var="expense">
-			<apex:column value="{!expense.Name}"/>
-			<apex:column value="{!expense.cAmount__c}"/>
-		</apex:pageBlockTable>
-	</apex:pageBlock>
+<apex:pageBlock title="Gastos">
+<apex:pageBlockTable value="{!expenses}" var="expense">
+<apex:column value="{!expense.Name}"/>
+<apex:column value="{!expense.cAmount__c}"/>
+</apex:pageBlockTable>
+</apex:pageBlock>
 
 <style>
 .container {
-  display:flex;
-  color:black;
-  font-size:16px;
-  text-align:center;
+	display:flex;
+	color:black;
+	font-size:16px;
+	text-align:center;
 }
 .labelStyle {
-   display:flex;
-   width:200px;
-   color:purple;
-   font-size:16px;
-   text-align:center;
+	display:flex;
+	width:200px;
+	color:purple;
+	font-size:16px;
+	text-align:center;
 }
 
 </style>
