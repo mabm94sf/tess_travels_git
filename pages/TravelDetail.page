@@ -75,18 +75,47 @@
 	</div>
 	<div class="slds-p-horizontal--small slds-size--1-of-1 slds-border--bottom slds-p-top--small">
 		<div class="slds-text-title--caps slds-theme--shade slds-p-around--x-small " > ¿Solicitó anticipo? </div>
-		<div class=" slds-p-around--small">    <apex:outputField value="{!travelDetail.bAdvancePaymentRequest__c}" id="cashAdvance"/></div>
+		<div class=" slds-p-around--small">    {!IF(travelDetail.bAdvancePaymentRequest__c,"SÍ","NO")} </div>
 	</div>
 </div>
 
+<div class="slds-p-around--xx-large slds-p-left--xx-large">
+<div class="slds-box slds-theme--success slds-p-around--x-small">GASTOS</div>
+<table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+	<thead>
+		<tr class="slds-text-heading--label">
+			<th class="slds-is-sortable" scope="col">
+				<div class="slds-truncate">Categoría
+				</div>
+			</th>
+			<th class="slds-is-sortable" scope="col">
+				<div class="slds-truncate">Nombre del gasto
+				</div>
+			</th>
+			<th class="slds-is-sortable" scope="col">
+				<div class="slds-truncate">Cantidad
+				</div>
+			</th>
 
+			<th class="slds-cell-shrink"></th>
+		</tr>
+	</thead>
+	<tbody>
+	<apex:repeat value="{!expenses}" var="expense" id="expensesValues">
+	<tr class="slds-hint-parent">
+		<td class="slds-truncate" data-label="Categoría"><apex:outputField value="{!expense.mdCategory__r.Name}"/></td>
+		<td class="slds-truncate"  data-label="Descripción">  {!expense.Name}</td>
+		<td class="slds-truncate" data-label="Cantidad facturada">  {!expense.cAmount__c}</td>
 
-<apex:pageBlock title="Gastos">
-<apex:pageBlockTable value="{!expenses}" var="expense">
-<apex:column value="{!expense.Name}"/>
-<apex:column value="{!expense.cAmount__c}"/>
-</apex:pageBlockTable>
-</apex:pageBlock>
+<td>
+			<strong class="clickable noselect">Eliminar</strong>
+</td>
+	</tr>
+</apex:repeat>
+	</tbody>
+</table>
+</div>
+
 
 <style>
 .container {

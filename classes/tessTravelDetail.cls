@@ -21,7 +21,7 @@ public PageReference initializeController() {
         travelDetail = [SELECT name, sDescription__c, startingPoint__c, arrival__c, dDateOfDeparture__c, dDateOfReturn__c, objective__c,
         				pklTypeOfTravel__c, travelStatus__c, bAdvancePaymentRequest__c
         				FROM tessTravel__c WHERE mdTraveler__c =: travelerProfile.Id AND id =: travelId LIMIT 1];
-        expenses = [SELECT id, Name,sMoreDetails__c, cAmount__c FROM tessExpense__c WHERE mdTravel__c =:travelId];
+        expenses = [SELECT id, Name,sMoreDetails__c, cAmount__c, mdCategory__r.name FROM tessExpense__c WHERE mdTravel__c =:travelId];
 
       return null;
     } else {
@@ -47,7 +47,7 @@ public Boolean validateSession() {
     }
 
 public PageReference InvalidSession() {
-        return new PageReference('/Login?returnTo=/TravelDetail');
+        return new PageReference('/Login?returnTo=/MainTravel');
     }
 
 public PageReference travelDetailPage() {
