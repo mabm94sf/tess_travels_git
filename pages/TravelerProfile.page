@@ -14,7 +14,7 @@
     <div class="tess-headerbox" >
 
       <!-- MASTHEAD -->
-      <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium">
+      <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium slds-text-heading--large">
         <center>
           Perfil del viajero
         </center>

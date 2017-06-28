@@ -11,9 +11,9 @@
 <body>
 
   <div id="prueba" class="tess-headerbox">
-    <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium">
+    <h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium slds-text-heading--large">
       <center>
-        Mis viajes
+        POLÍTICAS DE VIAJE
       </center>
 
     </h1>
@@ -28,12 +28,7 @@
   </div>
 
 
-  <br/>
-
-
-
 <br/>
-<h1 id="header43" class="slds-text-heading--large" style="color:purple;margin-left:2em">POLÍTICAS DE VIAJE</h1>
 <br/>
 <div style="margin:auto;width:95%" >
 <embed src="https://resources.docs.salesforce.com/sfdc/pdf/salesforce_pages_developers_guide.pdf" width="90%" height="400px" />
@@ -43,5 +38,6 @@
 
 
 </body>
+<c:tessFooter />
 </html>
 </apex:page>

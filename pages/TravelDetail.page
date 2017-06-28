@@ -10,9 +10,9 @@
 </head>
 
 <div id="Detalle" class="tess-headerbox">
-	<h1 class="slds-text-heading--label slds-m-bottom--large tess-medium-font slds-text-color--inverse slds-p-around--medium">
+	<h1 class="slds-text-heading--label slds-m-bottom--large tess-large-font slds-text-color--inverse slds-p-around--medium slds-text-heading--large">
 		<center>
-			Detalle del viaje <br/><apex:outputField value="{!travelDetail.name}"/>
+			Detalle del viaje
 		</center>
 
 	</h1>
@@ -28,10 +28,11 @@
 
 
 <br/>
+<!--
 <div class="slds-grid slds-grid__vertical-align-center slds-grid--align-end">
 	<button class="slds-button slds-button--destructive slds-order--1">Eliminar</button>
 	<div class="slds-order--2" style="width:3em;"></div>
-</div>
+</div>-->
 
 
 <div class="slds-grid slds-wrap  slds-p-around--small slds-p-left--x-large">
@@ -133,6 +134,6 @@
 }
 
 </style>
-
+<c:tessFooter />
 </html>
 </apex:page>
