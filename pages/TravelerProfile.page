@@ -255,7 +255,8 @@
       <td class="slds-truncate"  data-label="País">  {!elemento.pklCountry__c}</td>
       <td class="slds-truncate" data-label="Número de VISA">  {!elemento.Name}</td>
       <td class="" data-label="Fecha de expiración">  <apex:outputField value="{!elemento.dExpiresOn__c}"/></td>
-      <td class="slds-truncate" data-label=""><apex:outputPanel >
+      <td class="slds-truncate" data-label="">
+        <apex:outputPanel >
 
         <strong class="clickable noselect">Eliminar</strong>
 

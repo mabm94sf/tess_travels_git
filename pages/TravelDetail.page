@@ -79,8 +79,9 @@
 		<div class=" slds-p-around--small">    {!IF(travelDetail.bAdvancePaymentRequest__c,"SÍ","NO")} </div>
 	</div>
 </div>
-
 <div class="slds-p-around--xx-large slds-p-left--xx-large">
+<apex:outputPanel  id="expenseList">
+<apex:form id="myExpenseForm">
 <div class="slds-box slds-theme--success slds-p-around--x-small">GASTOS</div>
 <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
 	<thead>
@@ -109,14 +110,23 @@
 		<td class="slds-truncate" data-label="Cantidad facturada">  {!expense.cAmount__c}</td>
 
 <td>
-			<strong class="clickable noselect">Eliminar</strong>
-</td>
+	<apex:outputPanel >
+
+	<strong class="clickable noselect">Eliminar</strong>
+
+<apex:actionSupport event="onclick" action="{!deleteExpense}" rerender="expenseList" >
+<apex:param name="testParam" value="{!expense.id}" assignTo="{!expenseId}" />
+</apex:actionSupport>
+</apex:outputPanel></td>
+
+
 	</tr>
 </apex:repeat>
 	</tbody>
 </table>
+</apex:form>
+</apex:outputPanel>
 </div>
-
 
 <style>
 .container {
